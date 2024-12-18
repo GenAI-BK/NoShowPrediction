@@ -13,7 +13,7 @@ db_file_path="database.db"
 
 def display_slot_management(predicted_df):
     st.subheader("Slot Management Data")
-    st.dataframe(predicted_df)
+    st.dataframe(predicted_df, hide_index=True)
 
 # Function to display Resource Management (for now, showing message)
 def display_resource_management():
@@ -45,6 +45,13 @@ def display_resource_management():
     # Create and display a summary table
     summary_df = pd.DataFrame(data)
     st.table(summary_df)
+# Function to display Resource Management (for now, showing message)
+# Function to display Resource Management (for now, showing message)
+# Function to display Resource Management (for now, showing message)
+# def display_resource_management():
+    
+
+
 
 # Streamlit UI components
 st.title('No-Show Predictor')
@@ -108,7 +115,10 @@ with col2:
         
         st.session_state.resource_management_clicked = True
         st.session_state.slot_management_clicked = False
-        display_resource_management()
+        # display_resource_management()
+if st.session_state.get('resource_management_clicked', False):
+    
+    display_resource_management()
 
 # If Slot Management button was clicked, display the metrics in a table
 if st.session_state.get('slot_management_clicked', False):
@@ -180,9 +190,10 @@ if st.session_state.get('slot_management_clicked', False):
 
         # Step 6: Reset the index to remove any extra indices from groupby or apply
         df_copy = df_copy.reset_index(drop=True)
+        df_copy['AppointmentID'] = df_copy['AppointmentID'].apply(lambda x: f"{x:.0f}")
 
         # Step 7: Display the updated DataFrame
-        
+        print(df_copy.head())
         print(df_copy.columns)
         # Step 11: Display the updated DataFrame
         display_slot_management(df_copy)
