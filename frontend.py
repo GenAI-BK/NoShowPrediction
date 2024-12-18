@@ -77,7 +77,7 @@ if st.button('Predict'):
 
         # Concatenate data and predictions
         final_df = pd.concat([data, result_df], axis=1, ignore_index=False)
-        print(final_df.columns)
+       
         # Store the predicted results in session state
         st.session_state.final_df = final_df  # Storing the final DataFrame with predictions
 
@@ -192,10 +192,8 @@ if st.session_state.get('slot_management_clicked', False):
         df_copy = df_copy.reset_index(drop=True)
         df_copy['AppointmentID'] = df_copy['AppointmentID'].apply(lambda x: f"{x:.0f}")
 
+       
         # Step 7: Display the updated DataFrame
-        print(df_copy.head())
-        print(df_copy.columns)
-        # Step 11: Display the updated DataFrame
         display_slot_management(df_copy)
 
     else:
